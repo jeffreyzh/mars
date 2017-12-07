@@ -1,4 +1,5 @@
 apply plugin: "com.android.library"
+//apply plugin: 'upaar'
 
 android {
     compileSdkVersion 23
@@ -38,9 +39,55 @@ android {
 }
 
 
+try {
+    android.libraryVariants.all { variant ->
+        def name = variant.buildType.name
+        if (name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
+            return; // Skip debug builds.
+        }
+        def task = project.tasks.create "jar${name.capitalize()}", Jar
+        task.dependsOn variant.javaCompile
+        task.from variant.javaCompile.destinationDir
+        artifacts.add('archives', task);
+    }
+} catch (Exception e) {
+}
+
+task sourceJar(type: Jar) {
+    from 'src/main/java'
+}
+//
+//upinfo {
+//    groupId = GROUP
+//    artifactId = POM_ARTIFACT_ID
+//    version = VERSION_NAME
+//    gitRepo = 'origin'
+//}
+
+
+ext {
+    POM_PACKAGING = "pom"
+    POM_DESCRIPTION = "Mars core"
+
+    POM_URL = "https://github.com/Tencent/mars"
+    POM_SCM_URL = "https://github.com/Tencent/mars"
+    POM_SCM_CONNECTION = "scm:git:https://github.com/Tencent/mars.git"
+    POM_SCM_DEV_CONNECTION = "scm:git:git@github.com:Tencent/mars.git"
+
+    POM_LICENCE_NAME = ""
+    POM_LICENCE_URL = ""
+    POM_LICENCE_DIST = ""
+
+    POM_DEVELOPER_ID = "shockcao"
+    POM_DEVELOPER_NAME = "Cao ShaoKun"
+
+    gitRepo = "origin"
+}
+
 dependencies {
     compile 'javax.validation:validation-api:1.1.0.Final'
 }
 
 apply from: "${rootDir}/gradle/build_libraries.gradle"
 apply from: 'bintray.gradle'
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

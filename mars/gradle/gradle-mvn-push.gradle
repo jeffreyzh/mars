@@ -1,0 +1,147 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
+            : "http://maven.mogujie.org/nexus/content/repositories/mitreleases/"
+}
+
+def getSnapshotRepositoryUrl() {
+    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
+            : "http://maven.mogujie.org/nexus/content/repositories/mitsnapshots/"
+}
+
+def getRepositoryUsername() {
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+}
+
+def getRepositoryPassword() {
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+}
+
+def getBuildType(){
+    def buildTypes = android.buildTypes
+
+    buildTypes.each{
+        def name = it.name
+
+        def task = project.tasks.create "androidSourcesjar${name.capitalize()}", Jar
+        println '--task---'
+        println task
+        task.classifier  "${name}.sources"
+        task.from android.sourceSets.main.java.sourceFiles
+        artifacts.add('archives', task);
+    }
+
+    return name
+}
+
+def gitTag() {
+//    if (VERSION_NAME ==~ /^\d\.\d\.\d$/) {
+    if(isReleaseBuild()){
+        Process processStatus = "git status --porcelain".execute()
+        String status = processStatus.getText()
+        if (!status.equals("")) {
+            println '--------------------------------------------------'
+            println '---       You have something not commit        ---'
+            println '--------------------------------------------------'
+            throw new StopExecutionException("")
+        }
+        "git tag ${VERSION_NAME}".execute()
+        if (null != gitRepo && !gitRepo.empty) {
+            println '--------------------------------------------------'
+            String pushTag = "git push ${gitRepo} ${VERSION_NAME}"
+            println pushTag
+            Process process = pushTag.execute()
+            println process.text
+        }
+    }
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment {
+                    MavenDeployment deployment -> signing.signPom(deployment);
+                }
+
+                pom.groupId = GROUP
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = VERSION_NAME
+
+                println(pom.groupId)
+                println(pom.artifactId)
+                println(pom.version)
+
+                repository(url: getReleaseRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
+                snapshotRepository(url: getSnapshotRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
+
+                pom.project {
+                    name POM_NAME
+                    packaging POM_PACKAGING
+                    description POM_DESCRIPTION
+                    url POM_URL
+
+                    scm {
+                        url POM_SCM_URL
+                        connection POM_SCM_CONNECTION
+                        developerConnection POM_SCM_DEV_CONNECTION
+                    }
+
+                    licenses {
+                        license {
+                            name POM_LICENCE_NAME
+                            url POM_LICENCE_URL
+                            distribution POM_LICENCE_DIST
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id POM_DEVELOPER_ID
+                            name POM_DEVELOPER_NAME
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+//        gitTag();
+    }
+
+    task androidJavadocs(type: Javadoc) {
+        failOnError false // add this line
+        source = android.sourceSets.main.java.srcDirs
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        classpath += files(ext.androidJar)
+    }
+
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
+
+    artifacts {
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    }
+}

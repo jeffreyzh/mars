@@ -22,7 +22,6 @@
 
 #include <string>
 #include <vector>
-#include <mwcs-client/client-mars/mwcs_long_link.h>
 
 #include "mars/comm/messagequeue/message_queue.h"
 
@@ -45,7 +44,7 @@ extern void (*Destory)(ShortLinkInterface* _short_link_channel);
 
 namespace LongLinkChannelFactory {
 
-extern MWCSLongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource);
+extern LongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource);
 
 extern void (*Destory)(LongLink* _long_link_channel);
 

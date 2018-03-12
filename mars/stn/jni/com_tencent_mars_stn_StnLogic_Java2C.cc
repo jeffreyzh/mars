@@ -18,6 +18,8 @@
 #include <jni.h>
 #include <string>
 #include <map>
+#include <mwcs-client/client-mars/mwcs_mars.h>
+#include <android/log.h>
 
 #include "mars/baseevent/active_logic.h"
 #include "mars/baseevent/baseprjevent.h"
@@ -41,6 +43,7 @@
 #include "stn/proto/stnproto_logic.h"
 
 #include <android/log.h>
+#include <mwcs-client/client-mars/callback/jni/mwcs_mars_jni_invocation_callback.h>
 
 using namespace mars::stn;
 
@@ -153,6 +156,9 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setBackupIPs
  * Method:    startTask
  * Signature: (Lcom/tencent/mars/stn/StnLogic$Task;)V
  */
+#define MAKE_HEADER(NAME, VALUE)                                               \
+  { NAME, sizeof(NAME) - 1, VALUE, sizeof(VALUE) - 1 , false}
+
 DEFINE_FIND_STATIC_METHOD(KJava2C_startTask, KNetJava2C, "startTask", "(Lcom/tencent/mars/stn/StnLogic$Task;)V")
 JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_startTask
   (JNIEnv *_env, jclass, jobject _task) {
@@ -221,6 +227,20 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_startTask
 		task.cgi = ScopedJstring(_env, cgi).GetChar();
 		_env->DeleteLocalRef(cgi);
 	}
+
+
+	jobject user_context = JNU_GetField(_env, _task, "userContext", "Ljava/lang/Object;").l;
+
+	mwcs_mars_request_submit_parameter *parameter = new mwcs_mars_request_submit_parameter;
+	memset(parameter, 0, sizeof(mwcs_mars_request_submit_parameter));
+
+	mwcs_mars::process_mars_parameter(_env, parameter, user_context);
+
+	parameter->info.on_header = mwcs_mars::call_mwcs_mars_request_on_header_in_java;
+	parameter->info.on_data = mwcs_mars::call_mwcs_mars_request_on_data_in_java;
+	parameter->info.on_complete = mwcs_mars::call_mwcs_mars_request_on_complete_in_java;
+
+	task.user_context = parameter;//user_context为外部参数
 
 	StartTask(task);
 }

@@ -324,6 +324,13 @@ bool (*OnLonglinkIdentifyResponse)(const AutoBuffer& response_buffer, const Auto
 	return sg_callback->OnLonglinkIdentifyResponse(response_buffer, identify_buffer_hash);
 };
 
+void (*onConnect)()
+=[] () {
+	xassert2(sg_callback != NULL);
+	return sg_callback->onConnect();
+};
+
+
 void (*RequestSync)() 
 = []() {
 	xassert2(sg_callback != NULL);

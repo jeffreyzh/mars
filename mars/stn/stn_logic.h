@@ -63,8 +63,6 @@ namespace stn{
         virtual int  GetLonglinkIdentifyCheckBuffer(AutoBuffer& _identify_buffer, AutoBuffer& _buffer_hash, int32_t& _cmdid) = 0;
         //长连信令校验回包 
         virtual bool OnLonglinkIdentifyResponse(const AutoBuffer& _response_buffer, const AutoBuffer& _identify_buffer_hash) = 0;
-
-        virtual void onConnect() = 0;
         
         virtual void RequestSync() = 0;
         

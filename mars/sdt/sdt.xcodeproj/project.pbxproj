@@ -23,13 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3170A025177887B0004F5DDA /* CopyFiles */ = {
+		3170A025177887B0004F5DDA /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -172,7 +173,7 @@
 			buildPhases = (
 				3170A023177887B0004F5DDA /* Sources */,
 				3170A024177887B0004F5DDA /* Frameworks */,
-				3170A025177887B0004F5DDA /* CopyFiles */,
+				3170A025177887B0004F5DDA /* Copy Files */,
 			);
 			buildRules = (
 			);

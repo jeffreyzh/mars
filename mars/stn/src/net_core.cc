@@ -21,6 +21,7 @@
 #include "net_core.h"
 
 #include <stdlib.h>
+#include <iostream>
 
 #include "boost/bind.hpp"
 #include "boost/ref.hpp"
@@ -287,10 +288,14 @@ void NetCore::StartTask(const Task& _task) {
     bool start_ok = false;
 
 #ifdef USE_LONG_LINK
+//                std::cout << "last foreground : " << (15 * 60 * 1000 >= gettickcount() - ActiveLogic::Singleton::Instance()->LastForegroundChangeTime()) << std::endl;
+//                std::cout << "connect status : " << (LongLink::kConnected != longlink_task_manager_->LongLinkChannel().ConnectStatus()) << std::endl;
+//                std::cout << "connect isforeground : " << (ActiveLogic::Singleton::Instance()->IsForeground()) << std::endl;
+//                std::cout << "task channel select : " << (Task::kChannelLong & task.channel_select) << std::endl;
 
     if (LongLink::kConnected != longlink_task_manager_->LongLinkChannel().ConnectStatus()
-            && (Task::kChannelLong & task.channel_select) && ActiveLogic::Singleton::Instance()->IsForeground()
-
+            && (Task::kChannelLong & task.channel_select)
+            && ActiveLogic::Singleton::Instance()->IsForeground()
             && (15 * 60 * 1000 >= gettickcount() - ActiveLogic::Singleton::Instance()->LastForegroundChangeTime()))
         longlink_task_manager_->getLongLinkConnectMonitor().MakeSureConnected();
 
@@ -610,9 +615,98 @@ void NetCore::__OnShortLinkNetworkError(int _line, ErrCmdType _err_type, int _er
 void NetCore::__OnLongLinkConnStatusChange(LongLink::TLongLinkStatus _status) {
     if (LongLink::kConnected == _status) zombie_task_manager_->RedoTasks();
 
-    __ConnStatusCallBack();
+    __ConnStatusCallBack2(_status);
 }
 #endif
+
+void NetCore::__ConnStatusCallBack2(LongLink::TLongLinkStatus _status) {
+    int all_connstatus = kNetworkUnavailable;
+
+    if (shortlink_try_flag_) {
+        if (shortlink_error_count_ >= kShortlinkErrTime) {
+            all_connstatus = kServerFailed;
+        } else if (0 == shortlink_error_count_) {
+            all_connstatus = kConnected;
+        } else {
+            all_connstatus = kNetworkUnkown;
+        }
+    } else {
+        all_connstatus = kNetworkUnkown;
+    }
+
+    int longlink_connstatus = kNetworkUnkown;
+#ifdef USE_LONG_LINK
+    longlink_connstatus = _status;
+    xinfo2(TSF"before #2 reportNetConnectInfo longlink_connstatus:%_", longlink_connstatus);
+
+    switch (longlink_connstatus) {
+        case LongLink::kDisConnected:
+            all_connstatus = kNetworkUnavailable;
+            longlink_connstatus = kNetworkUnavailable;
+            break;
+        case LongLink::kConnectFailed:
+            if (shortlink_try_flag_) {
+                if (0 == shortlink_error_count_) {
+                    all_connstatus = kConnected;
+                }
+                else if (shortlink_error_count_ >= kShortlinkErrTime) {
+                    all_connstatus = kServerFailed;
+                }
+                else {
+                    all_connstatus = kNetworkUnkown;
+                }
+            }
+            else {
+                all_connstatus = kNetworkUnkown;
+            }
+            longlink_connstatus = kServerFailed;
+            break;
+
+        case LongLink::kConnectIdle:
+        case LongLink::kConnecting:
+            if (shortlink_try_flag_) {
+                if (0 == shortlink_error_count_) {
+                    all_connstatus = kConnected;
+                }
+                else if (shortlink_error_count_ >= kShortlinkErrTime) {
+                    all_connstatus = kServerFailed;
+                }
+                else {
+                    all_connstatus = kConnecting;
+                }
+            }
+            else {
+                all_connstatus = kConnecting;
+            }
+
+            longlink_connstatus = kConnecting;
+            break;
+
+        case LongLink::kConnected:
+            all_connstatus = kConnected;
+            shortlink_error_count_ = 0;
+            shortlink_try_flag_ = false;
+            longlink_connstatus = kConnected;
+            break;
+
+        default:
+            xassert2(false);
+            break;
+    }
+#else
+    if (shortlink_error_count_ >= kShortlinkErrTime) {
+    	all_connstatus = kServerFailed;
+    } else if (0 == shortlink_error_count_) {
+    	all_connstatus = kConnected;
+    } else {
+    	all_connstatus = kConnected;
+    }
+#endif
+
+    xinfo2(TSF"before #3 reportNetConnectInfo all_connstatus:%_, longlink_connstatus:%_", all_connstatus, longlink_connstatus);
+    ReportConnectStatus(all_connstatus, longlink_connstatus);
+}
+
 
 void NetCore::__ConnStatusCallBack() {
 

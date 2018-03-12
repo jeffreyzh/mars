@@ -576,6 +576,7 @@ inline void XLogger::DoTypeSafeFormat(const char* _format, const string_cast** _
 #endif
 
 //xlogger define
+#define XLOGGER_TAG "xlog"
 
 #ifndef XLOGGER_TAG
 #define XLOGGER_TAG ""

@@ -12,6 +12,8 @@ obj/
 xcuserdata
 xcshareddata
 
+/mars/cmake-build-debug
+
 /mars/comm/verinfo.h
 /mars/libraries/*/
 /mars/*/libs/

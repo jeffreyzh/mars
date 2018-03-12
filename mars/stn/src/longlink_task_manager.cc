@@ -102,8 +102,13 @@ bool LongLinkTaskManager::StopTask(uint32_t _taskid) {
         if (_taskid == first->task.taskid) {
             xinfo2(TSF"find the task taskid:%0", _taskid);
 
-            longlink_->Stop(first->task.taskid);
+            bool tosend = longlink_->Stop(first->task.taskid);
             lst_cmd_.erase(first);
+
+            if (!tosend) { //请求已经发送，需要发rst帧出去
+                longlink_->onStopTask(first->task);
+            }
+
             return true;
         }
 

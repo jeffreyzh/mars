@@ -106,6 +106,7 @@ class NetCore {
 #endif
     
     void    __ConnStatusCallBack();
+    void    __ConnStatusCallBack2(LongLink::TLongLinkStatus _status);
     void    __OnTimerCheckSuc();
     
     void    __OnSignalActive(bool _isactive);

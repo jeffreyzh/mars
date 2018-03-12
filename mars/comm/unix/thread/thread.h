@@ -296,7 +296,17 @@ class Thread {
 
         return ret;
     }
-    
+
+    bool is_joined() {
+        bool ret = false;
+        ScopedSpinLock lock(runable_ref_->splock);
+        if (isruning()) {
+            ret = runable_ref_->isjoined;
+            lock.unlock();
+        }
+        return ret;
+    }
+
     int kill(int sig) const {
         ScopedSpinLock lock(runable_ref_->splock);
 

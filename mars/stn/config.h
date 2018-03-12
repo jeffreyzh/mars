@@ -30,11 +30,11 @@
 #define DEF_TASK_RETRY_INTERNAL (1 * 1000)
 
 // Heartbeart Range
-#define MinHeartInterval (4  * 60 * 1000 + 30 * 1000)   // 4.5 minute
-#define MaxHeartInterval (9 * 60 * 1000 + 50 * 1000)   // 9 minute 50 seconds
+#define MinHeartInterval (1  * 60 * 1000)   // 1 minute
+#define MaxHeartInterval (2 * 60 * 1000)   // 2 minute
 
 // Heartbeat Step
-#define HeartStep (60 * 1000)      // try to increse current heartbeat by HeartStep
+#define HeartStep (10 * 1000)      // try to increse current heartbeat by HeartStep
 #define SuccessStep  (20 * 1000)   // when finish compute choose successHeart-=SuccessStep as the stable heartbeat
 
 #define MaxHeartFailCount (3)
@@ -42,17 +42,17 @@
 #define NetStableTestCount (3)     //We think it's time to test after NetStableCount times heartbeat using MinHeartInterval
 
 //signalling transmits timeout related constants
-const static unsigned int kBaseFirstPackageWifiTimeout = 12*1000;
+const static unsigned int kBaseFirstPackageWifiTimeout = 10*1000;
 const static unsigned int kBaseFirstPackageGPRSTimeout = 15*1000;
 
-const static unsigned int kMaxFirstPackageWifiTimeout = 22*1000;
-const static unsigned int kMaxFirstPackageGPRSTimeout = 30*1000;
+const static unsigned int kMaxFirstPackageWifiTimeout = 10*1000;
+const static unsigned int kMaxFirstPackageGPRSTimeout = 15*1000;
 
 const static unsigned int kGPRSMinRate = 4*1024;
 const static unsigned int kWifiMinRate = 12*1024;
 
-const static unsigned int kWifiPackageInterval = 8*1000;
-const static unsigned int kGPRSPackageInterval = 12*1000;
+const static unsigned int kWifiPackageInterval = 6*1000;
+const static unsigned int kGPRSPackageInterval = 9*1000;
 
 const static unsigned int kWifiTaskDelay = 1500;
 const static unsigned int kGPRSTaskDelay = 3000;

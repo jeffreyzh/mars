@@ -125,6 +125,8 @@ class LongLink {
     bool    Send(const AutoBuffer& _body, const AutoBuffer& _extension, const Task& _task);
     bool    SendWhenNoData(const AutoBuffer& _body, const AutoBuffer& _extension, uint32_t _cmdid, uint32_t _taskid);
     bool    Stop(uint32_t _taskid);
+    bool    __NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, AutoBuffer& _extension, Alarm& _alarm,
+                       volatile bool& _nooping, ConnectProfile& _profile);
 
     bool            MakeSureConnected(bool* _newone = NULL);
     void            Disconnect(TDisconnectInternalCode _scene);
@@ -144,7 +146,6 @@ class LongLink {
 
     bool    __SendNoopWhenNoData();
     bool    __NoopReq(XLogger& _xlog, Alarm& _alarm, bool need_active_timeout);
-    bool    __NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, AutoBuffer& _extension, Alarm& _alarm, bool& _nooping, ConnectProfile& _profile);
 
     virtual void     __OnAlarm();
     virtual void     __Run();
@@ -159,11 +160,23 @@ class LongLink {
     void       __NotifySmartHeartbeatHeartResult(bool _succes, bool _fail_of_timeout, ConnectProfile& _profile);
     void       __NotifySmartHeartbeatJudgeMIUIStyle();
 
-  protected:
+public:
+
+    virtual int onLongLinkUnpack(const AutoBuffer& _packed) {return 0;};
+    virtual int onLongLinkPack(Task& task, AutoBuffer& _packed) {return 0;};
+    virtual int secureLayerHandshake(int _sock, ConnectProfile& _profile) {return 0;};
+    virtual int prepareConnectTask(ConnectProfile& conn_profile) {return 0;};
+    virtual void onDisconnect() {};
+    virtual void onStopTask(const Task& task) {};
+
+    Alarm alarmnooptimeout;
+    volatile bool nooping;
+    Mutex                           mutex_;
+
+protected:
     MessageQueue::ScopeRegister     asyncreg_;
     NetSource&                      netsource_;
     
-    Mutex                           mutex_;
     Thread                          thread_;
 
     boost::scoped_ptr<longlink_tracker>         tracker_;

@@ -13,9 +13,9 @@
 #define BOOST_BAD_OPTIONAL_ACCESS_22MAY2014_HPP
 
 #include <stdexcept>
-#if __cplusplus < 201103L
+//#if __cplusplus < 201103L
 #include <string> // to make converting-ctor std::string(char const*) visible
-#endif
+//#endif
 
 namespace mars_boost {} namespace boost = mars_boost; namespace mars_boost {
 

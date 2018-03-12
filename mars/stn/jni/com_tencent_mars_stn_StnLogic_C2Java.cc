@@ -17,6 +17,11 @@
 
 #include <jni.h>
 #include <vector>
+#include <mwcs-client/client-mars/callback/mwcs_mars_callback.h>
+#include <mwcs-client/client-mars/callback/jni/mwcs_mars_jni_invocation_callback.h>
+#include <mwcs-client/client-mars/mwcs_mars.h>
+#include <mwcs-client/client-mars/mwcs_mars_request.h>
+#include <src/net_core.h>
 
 #include "mars/comm/autobuffer.h"
 #include "mars/comm/xlogger/xlogger.h"
@@ -39,6 +44,131 @@ int (*OnTaskEnd)(uint32_t _taskid, void* const _user_context, int _error_type, i
 = [](uint32_t _taskid, void* const _user_context, int _error_type, int _error_code) {
 
     xverbose_function();
+
+	xdebug2(TSF"on task end, id: %_, error_code: %_", _taskid, _error_code);
+
+	mwcs_mars_request_submit_parameter* parameter = (mwcs_mars_request_submit_parameter *) _user_context;
+
+    if (parameter !=  NULL) {
+		int err = OK;
+
+		if (parameter->request == NULL) {//request为空，说明在提交任务前已出错（如断连，雪崩等），这里补上方便回调到上层
+			parameter->request = init_mars_request(NULL, parameter->url, parameter->method, parameter->info, parameter->user_data, err);
+		}
+
+		mwcs_mars_request* request = parameter->request;
+
+		if (request) {
+			request->metrics.complete_time = ::timeMs();
+		}
+
+        if (err == OK && parameter->info.on_complete != NULL) {
+            mwcs_request_complete_code code = MWCS_REQUEST_COMPLETE_UNKNOWN;
+            switch (_error_code) {
+                case NGHTTP2_NO_ERROR:code = MWCS_REQUEST_COMPLETE_NO_ERROR;
+                    break;
+                case NGHTTP2_PROTOCOL_ERROR :code = MWCS_REQUEST_COMPLETE_PROTOCOL_ERROR;
+                    break;
+                case NGHTTP2_INTERNAL_ERROR :code = MWCS_REQUEST_COMPLETE_INTERNAL_ERROR;
+                    break;
+                case NGHTTP2_FLOW_CONTROL_ERROR :code = MWCS_REQUEST_COMPLETE_FLOW_CONTROL_ERROR;
+                    break;
+                case NGHTTP2_SETTINGS_TIMEOUT :code = MWCS_REQUEST_COMPLETE_SETTINGS_TIMEOUT;
+                    break;
+                case NGHTTP2_STREAM_CLOSED :code = MWCS_REQUEST_COMPLETE_STREAM_CLOSED;
+                    break;
+                case NGHTTP2_FRAME_SIZE_ERROR :code = MWCS_REQUEST_COMPLETE_FRAME_SIZE_ERROR;
+                    break;
+                case NGHTTP2_REFUSED_STREAM :code = MWCS_REQUEST_COMPLETE_REFUSED_STREAM;
+                    break;
+                case NGHTTP2_CANCEL :code = MWCS_REQUEST_COMPLETE_CANCEL;
+                    break;
+                case NGHTTP2_COMPRESSION_ERROR:code = MWCS_REQUEST_COMPLETE_COMPRESSION_ERROR;
+                    break;
+                case NGHTTP2_CONNECT_ERROR:code = MWCS_REQUEST_COMPLETE_CONNECT_ERROR;
+                    break;
+                case NGHTTP2_ENHANCE_YOUR_CALM :code = MWCS_REQUEST_COMPLETE_ENHANCE_YOUR_CALM;
+                    break;
+                case NGHTTP2_INADEQUATE_SECURITY :code = MWCS_REQUEST_COMPLETE_INADEQUATE_SECURITY;
+                    break;
+                case NGHTTP2_HTTP_1_1_REQUIRED:code = MWCS_REQUEST_COMPLETE_HTTP_1_1_REQUIRED;
+                    break;
+
+                //mars的错误码
+                case kEctLocalTaskParam :code = MWCS_REQUEST_LOCAL_TASK_PARAMETER_ERROR;
+                    break;
+                case kEctLocalChannelSelect :code = MWCS_REQUEST_CHANNEL_TYPE_ERROR;
+                    break;
+                case kEctLocalNoNet :code = MWCS_REQUEST_NO_NET;
+                    break;
+                case kEctLocalStartTaskFail :code = MWCS_REQUEST_START_TASK_FAIL;
+                    break;
+                case kEctLocalTaskTimeout :code = MWCS_REQUEST_TASK_TIMEOUT;
+                    break;
+                case kEctLocalAntiAvalanche :code = MWCS_REQUEST_ANTI_AVALANCHE;
+                    break;
+                case kEctLocalChannelID :code = MWCS_REQUEST_CHANNEL_ID;
+                    break;
+                case kEctLocalReset :code = MWCS_REQUEST_MARS_RESET;
+                    break;
+
+                case kEctLongFirstPkgTimeout :code = MWCS_REQUEST_FIRST_PACKAGE_TIMEOUT;
+					break;
+                case kEctLongPkgPkgTimeout :code = MWCS_REQUEST_PACKAGE_PACKAGE_TIMEOUT;
+					break;
+                case kEctLongReadWriteTimeout :code = MWCS_REQUEST_READ_WRITE_TIMEOUT;
+					break;
+                case kEctLongTaskTimeout :code = MWCS_REQUEST_LONG_TASK_TIMEOUT;
+                    break;
+
+                case kEctDnsMakeSocketPrepared :code = MWCS_REQUEST_DNS_MAKE_SOCKET_PREPARED;
+                    break;
+                case kEctSocketMakeSocketPrepared :code = MWCS_REQUEST_SOCKET_MAKE_SOCKET_PREPARED;
+                    break;
+
+                case kEctSocketRecvErr :code = MWCS_REQUEST_SOCKET_RECV_ERROR;
+                    break;
+                case kEctSocketShutdown :code = MWCS_REQUEST_SOCKET_SHUTDOWN;
+                    break;
+                case kEctNetMsgXPHandleBufferErr :code = MWCS_REQUEST_HANDLE_BUFFER_ERROR;
+                    break;
+				case kNoSession :code = MWCS_REQUEST_NO_SESSION_ERROR;
+					break;
+
+                default:
+					xwarn2(TSF"Request complete with unknow error code, reason: %_", _error_code);
+					break;
+            }
+
+
+			mwcs_mars::update_request_metrics(request);
+            //暂时用不到mwcs_mars_session
+            parameter->info.on_complete(NULL, request, code);
+        }
+
+		if (_error_code == kEctLongFirstPkgTimeout ||
+				_error_code == kEctLongPkgPkgTimeout ||
+				_error_code == kEctLongReadWriteTimeout ||
+				_error_code == kEctLongTaskTimeout ||
+				_error_code == kEctLocalTaskTimeout) {
+
+			boost::shared_ptr <NetCore> stn_ptr = NetCore::Singleton::Instance_Weak().lock();
+			if (stn_ptr) {
+				NetCore* netCore = stn_ptr.get();
+				MWCSLongLink &longlink = dynamic_cast<MWCSLongLink &> (stn_ptr.get()->Longlink());
+
+				longlink.clearStreamUserData(parameter->request->stream_id);
+                bool tosend = longlink.Stop(_taskid);
+                if (!tosend && parameter->request->task) { //请求已经发送，需要发rst帧出去
+                    longlink.onStopTask(*(parameter->request->task));
+                }
+			}
+
+		}
+
+    }
+
+	mwcs_mars::free_task_parameter(parameter);
 
 	VarCache* cache_instance = VarCache::Singleton();
 

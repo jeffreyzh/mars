@@ -11,6 +11,7 @@
 
 #include <exception>
 #include <stdexcept>
+#include <istream>
 #include <boost/config.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/mpl/if.hpp>

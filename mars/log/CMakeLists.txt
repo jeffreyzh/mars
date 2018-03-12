@@ -14,11 +14,13 @@ include_directories(..)
 include_directories(../..)
 include_directories(src)
 include_directories(crypt)
+include_directories(crypt/micro-ecc-master)
 include_directories(export_include)
 include_directories(export_include/xlogger)
 
 aux_source_directory(crypt SOURCE_FILES)
 aux_source_directory(src SOURCE_FILES)
+aux_source_directory(crypt/micro-ecc-master SOURCE_FILES)
 
 if (ENABLE_ANDROID_SUPPORT)
     aux_source_directory(jni SOURCE_FILES)

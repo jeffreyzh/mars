@@ -1,0 +1,28 @@
+PODS:
+  - mars (10.2.1):
+    - mars/app (= 10.2.1)
+    - mars/baseevent (= 10.2.1)
+    - mars/comm (= 10.2.1)
+    - mars/log (= 10.2.1)
+    - mars/sdt (= 10.2.1)
+    - mars/stn (= 10.2.1)
+  - mars/app (10.2.1)
+  - mars/baseevent (10.2.1)
+  - mars/comm (10.2.1)
+  - mars/log (10.2.1)
+  - mars/sdt (10.2.1)
+  - mars/stn (10.2.1)
+
+DEPENDENCIES:
+  - mars (from `../`)
+
+EXTERNAL SOURCES:
+  mars:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  mars: d3415cd763d69a8401706b8540fcb876f6fbe72f
+
+PODFILE CHECKSUM: 2199bd5d64124edb45378ff69d3abd5a62e482c8
+
+COCOAPODS: 1.2.1

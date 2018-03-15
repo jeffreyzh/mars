@@ -52,6 +52,7 @@
         "mars/comm/assert/*.{h,m,c,mm,cpp,cc}",
         "mars/boost/libs/**/*.{h,m,c,mm,cpp,cc}"
       ],
+      "exclude_files": "mars/boost/libs/context/src/windows",
       "requires_arc": false,
       "private_header_files": [],
       "pod_target_xcconfig": {

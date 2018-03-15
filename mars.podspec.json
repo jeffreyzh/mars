@@ -1,5 +1,45 @@
 {
     "public_header_files": [], 
+    "description": "mars", 
+    "license": "MIT", 
+    "requires_arc": true, 
+    "xcconfig": {
+        "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
+    }, 
+    "authors": {
+        "gairui": "gairui@mogujie.com"
+    }, 
+    "summary": "mars", 
+    "libraries": [
+        "z", 
+        "resolv", 
+        "stdc++"
+    ], 
+    "platforms": {
+        "ios": "7.0"
+    }, 
+    "version": "10.0.1-rc.1", 
+    "source": {
+        "git": "http://gitlab.mogujie.org/mwp/MWCS-Client.git", 
+        "tag": "10.0.1-rc.1", 
+        "submodules": true
+    }, 
+    "dependencies": {}, 
+    "source_files": [], 
+    "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(inherited)\"", 
+        "USER_HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)\"", 
+        "USE_HEADERMAP": "NO", 
+        "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO", 
+        "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
+        "ALWAYS_SEARCH_USER_PATHS": "NO"
+    }, 
+    "frameworks": [
+        "SystemConfiguration", 
+        "Foundation", 
+        "CoreTelephony"
+    ], 
+    "homepage": "http://gitlab.mogujie.org/mwp/mars", 
     "subspecs": [
         {
             "private_header_files": [], 
@@ -87,46 +127,6 @@
                 "mars/app/*.{h,m,c,mm,cpp,cc}"
             ]
         }
-    ], 
-    "description": "mars", 
-    "license": "MIT", 
-    "platforms": {
-        "ios": "7.0"
-    }, 
-    "xcconfig": {
-        "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
-    }, 
-    "source_files": [], 
-    "summary": "mars", 
-    "libraries": [
-        "z", 
-        "resolv", 
-        "stdc++"
-    ], 
-    "requires_arc": true, 
-    "version": "10.2.2-rc.1", 
-    "source": {
-        "git": "http://gitlab.mogujie.org/mwp/MWCS-Client.git", 
-        "tag": "10.2.2-rc.1", 
-        "submodules": true
-    }, 
-    "dependencies": {}, 
-    "authors": {
-        "gairui": "gairui@mogujie.com"
-    }, 
-    "pod_target_xcconfig": {
-        "HEADER_SEARCH_PATHS": "\"$(inherited)\"", 
-        "USER_HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)\"", 
-        "USE_HEADERMAP": "NO", 
-        "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO", 
-        "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
-        "ALWAYS_SEARCH_USER_PATHS": "NO"
-    }, 
-    "homepage": "http://gitlab.mogujie.org/mwp/mars", 
-    "frameworks": [
-        "SystemConfiguration", 
-        "Foundation", 
-        "CoreTelephony"
     ], 
     "name": "mars"
 }

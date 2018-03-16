@@ -50,7 +50,7 @@
                 "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO",
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",
                 "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
-            },
+            }
         },
         {
             "header_mappings_dir": "mars",

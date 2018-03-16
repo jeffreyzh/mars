@@ -2,24 +2,24 @@
     "public_header_files": [], 
     "description": "mars", 
     "license": "MIT", 
-    "requires_arc": true, 
+    "platforms": {
+        "ios": "7.0"
+    }, 
     "xcconfig": {
         "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
+    }, 
+    "source_files": [], 
+    "summary": "mars", 
+    "requires_arc": true, 
+    "version": "10.0.1-rc.6", 
+    "source": {
+        "git": "http://gitlab.mogujie.org/mwp/MWCS-Client.git", 
+        "tag": "10.0.1-rc.6", 
+        "submodules": true
     }, 
     "authors": {
         "gairui": "gairui@mogujie.com"
     }, 
-    "summary": "mars", 
-    "platforms": {
-        "ios": "7.0"
-    }, 
-    "version": "10.0.1-rc.5", 
-    "source": {
-        "git": "http://gitlab.mogujie.org/mwp/MWCS-Client.git", 
-        "tag": "10.0.1-rc.5", 
-        "submodules": true
-    }, 
-    "source_files": [], 
     "pod_target_xcconfig": {
         "GCC_WARN_ABOUT_MISSING_PROTOTYPES": "NO", 
         "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
@@ -72,9 +72,9 @@
                 "mars/boost/libs/coroutine/src/posix/*.{h,m,c,mm,cpp,cc,hpp}"
             ], 
             "pod_target_xcconfig": {
-                "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
-                "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO", 
                 "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"", 
+                "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO", 
+                "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
                 "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
             }
         }, 

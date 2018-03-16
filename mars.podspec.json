@@ -83,7 +83,8 @@
                 "mars/boost/libs/coroutine/src/posix/*.{h,m,c,mm,cpp,cc,hpp}",
                 "mars/boost/bind.hpp",
                 "mars/boost/bind/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/config.hpp"
+                "mars/boost/config.hpp",
+                "mars/boost/config/*.{h,m,c,mm,cpp,cc,hpp}"
             ],
             "pod_target_xcconfig": {
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",

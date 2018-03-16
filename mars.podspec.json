@@ -51,7 +51,6 @@
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",
                 "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
             },
-            "exclude_files": ""
         },
         {
             "header_mappings_dir": "mars",
@@ -137,7 +136,6 @@
         "tag": "10.0.1-rc.4",
         "submodules": true
     },
-    "dependencies": {},
     "authors": {
         "gairui": "gairui@mogujie.com"
     },

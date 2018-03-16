@@ -97,7 +97,8 @@
                 "mars/boost/utility/addressof.hpp",
                 "mars/boost/get_pointer.hpp",
                 "mars/boost/config/no_tr1/memory.hpp",
-                "mars/boost/is_placeholder.hpp"
+                "mars/boost/is_placeholder.hpp",
+                "mars/boost/static_assert.hpp"
             ],
             "pod_target_xcconfig": {
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",

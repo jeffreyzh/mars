@@ -1,173 +1,130 @@
 {
-    "header_mappings_dir": "mars",
-    "public_header_files": [],
-    "description": "mars",
-    "license": "MIT",
-    "requires_arc": true,
-    "xcconfig": {
-        "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
-    },
-    "source_files": [],
-    "summary": "mars",
-    "libraries": [
-        "z",
-        "resolv",
-        "stdc++"
-    ],
-    "platforms": {
-        "ios": "7.0"
-    },
-    "version": "10.0.3-rc.4",
-    "source": {
-        "git": "http://gitlab.mogujie.org/mwp/mars.git",
-        "tag": "10.0.3-rc.4",
-        "submodules": true
-    },
-    "frameworks": [
-        "SystemConfiguration",
-        "Foundation",
-        "CoreTelephony"
-    ],
-    "authors": {
-        "gairui": "gairui@mogujie.com"
-    },
-    "pod_target_xcconfig": {
-        "GCC_WARN_ABOUT_MISSING_PROTOTYPES": "NO",
+  "header_mappings_dir": "mars",
+  "public_header_files": [],
+  "description": "mars",
+  "license": "MIT",
+  "requires_arc": true,
+  "xcconfig": {
+    "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
+  },
+  "source_files": [],
+  "summary": "mars",
+  "libraries": [
+    "z",
+    "resolv",
+    "stdc++"
+  ],
+  "platforms": {
+    "ios": "7.0"
+  },
+  "version": "10.0.3-rc.4",
+  "source": {
+    "git": "http://gitlab.mogujie.org/mwp/mars.git",
+    "tag": "10.0.3-rc.4",
+    "submodules": true
+  },
+  "frameworks": [
+    "SystemConfiguration",
+    "Foundation",
+    "CoreTelephony"
+  ],
+  "authors": {
+    "gairui": "gairui@mogujie.com"
+  },
+  "pod_target_xcconfig": {
+    "GCC_WARN_ABOUT_MISSING_PROTOTYPES": "NO",
+    "CLANG_WARN_STRICT_PROTOTYPES": "NO",
+    "GCC_PREPROCESSOR_DEFINITIONS": "\"$(inherited)\" \"COCOAPODS=1\" \"PB_NO_PACKED_STRUCTS=1\""
+  },
+  "homepage": "http://gitlab.mogujie.org/mwp/mars",
+  "subspecs": [{
+      "private_header_files": [],
+      "name": "comm",
+      "header_mappings_dir": "mars",
+      "requires_arc": false,
+      "source_files": [
+        "mars/comm/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/socket/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/xlogger/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/unix/**/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/thread/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/objc/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/network/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/messagequeue/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/dns/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/coroutine/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/corepattern/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/assert/*.{h,m,c,mm,cpp,cc}",
+        "mars/boost/**/*.{h,m,c,mm,cpp,cc,hpp,S}"
+      ],
+      "pod_target_xcconfig": {
         "CLANG_WARN_STRICT_PROTOTYPES": "NO",
-        "GCC_PREPROCESSOR_DEFINITIONS": "\"$(inherited)\" \"COCOAPODS=1\" \"PB_NO_PACKED_STRUCTS=1\""
+        "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO",
+        "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"",
+        "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
+      }
     },
-    "homepage": "http://gitlab.mogujie.org/mwp/mars",
-    "subspecs": [
-        {
-            "private_header_files": [],
-            "name": "comm",
-            "header_mappings_dir": "mars",
-            "requires_arc": false,
-            "source_files": [
-                "mars/comm/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/socket/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/xlogger/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/unix/**/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/thread/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/objc/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/network/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/messagequeue/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/dns/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/coroutine/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/corepattern/*.{h,m,c,mm,cpp,cc}",
-                "mars/comm/assert/*.{h,m,c,mm,cpp,cc}",
-                "mars/boost/libs/atomic/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/date_time/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/exception/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/filesystem/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/iostreams/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/smart_ptr/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/system/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/thread/src/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/thread/src/pthread/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/context/src/asm/jump_x86_64_sysv_macho_gas.S",
-                "mars/boost/libs/context/src/asm/make_x86_64_sysv_macho_gas.S",
-                "mars/boost/libs/context/src/asm/ontop_x86_64_sysv_macho_gas.S",
-                "mars/boost/libs/context/src/asm/jump_i386_sysv_macho_gas.S",
-                "mars/boost/libs/context/src/asm/make_i386_sysv_macho_gas.S",
-                "mars/boost/libs/context/src/asm/ontop_i386_sysv_macho_gas.S",
-                "mars/boost/libs/context/src/asm/ontop_arm_aapcs_macho_gas.S",
-                "mars/boost/libs/context/src/asm/ontop_arm64_aapcs_macho_gas.S",
-                "mars/boost/libs/context/src/asm/jump_arm_aapcs_macho_gas.S",
-                "mars/boost/libs/context/src/asm/jump_arm64_aapcs_macho_gas.S",
-                "mars/boost/libs/context/src/asm/make_arm_aapcs_macho_gas.S",
-                "mars/boost/libs/context/src/asm/make_arm64_aapcs_macho_gas.S",
-                "mars/boost/libs/context/src/asm/posix/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/coroutine/src/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/coroutine/src/detail/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/libs/coroutine/src/posix/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/bind.hpp",
-                "mars/boost/type.hpp",
-                "mars/boost/detail/workaround.hpp",
-                "mars/boost/visit_each.hpp",
-                "mars/boost/mem_fn.hpp",
-                "mars/boost/bind/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/config.hpp",
-                "mars/boost/config/**/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/ref.hpp",
-                "mars/boost/core/ref.hpp",
-                "mars/boost/core/addressof.hpp",
-                "mars/boost/core/enable_if.hpp",
-                "mars/boost/core/is_same.hpp",
-                "mars/boost/utility/addressof.hpp",
-                "mars/boost/get_pointer.hpp",
-                "mars/boost/config/no_tr1/memory.hpp",
-                "mars/boost/is_placeholder.hpp",
-                "mars/boost/static_assert.hpp"
-            ],
-            "pod_target_xcconfig": {
-                "CLANG_WARN_STRICT_PROTOTYPES": "NO",
-                "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO",
-                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"",
-                "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
-            }
-        },
-        {
-            "header_mappings_dir": "mars",
-            "pod_target_xcconfig": {
-                "HEADER_SEARCH_PATHS": "\"$(STN_SRC_ROOT)/\" \"$(STN_SRC_ROOT)/../\" \"$(STN_SRC_ROOT)/../../\" \"$(STN_SRC_ROOT)/../comm\"",
-                "STN_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/stn"
-            },
-            "private_header_files": [],
-            "name": "stn",
-            "source_files": [
-                "mars/stn/*.{h,m,c,mm,cpp,cc}",
-                "mars/stn/src/*.{h,m,c,mm,cpp,cc}",
-                "mars/stn/proto/**/*.{h}"
-            ]
-        },
-        {
-            "header_mappings_dir": "mars",
-            "pod_target_xcconfig": {
-                "SDT_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/sdt",
-                "HEADER_SEARCH_PATHS": "\"$(SDT_SRC_ROOT)/\" \"$(SDT_SRC_ROOT)/../\" \"$(SDT_SRC_ROOT)/../../\" \"$(SDT_SRC_ROOT)/src\" \"$(SDT_SRC_ROOT)/../comm\""
-            },
-            "private_header_files": [],
-            "name": "sdt",
-            "source_files": [
-                "mars/sdt/*.{h,m,c,mm,cpp,cc}",
-                "mars/sdt/src/**/*.{h,m,c,mm,cpp,cc}"
-            ]
-        },
-        {
-            "header_mappings_dir": "mars",
-            "pod_target_xcconfig": {
-                "LOG_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/sdt",
-                "HEADER_SEARCH_PATHS": "\"$(LOG_SRC_ROOT)/\" \"$(LOG_SRC_ROOT)/../\" \"$(LOG_SRC_ROOT)/../../\" \"$(LOG_SRC_ROOT)/src\" \"$(LOG_SRC_ROOT)/../comm\""
-            },
-            "private_header_files": [],
-            "name": "log",
-            "source_files": [
-                "mars/log/*.{h,m,c,mm,cpp,cc}",
-                "mars/log/src/**/*.{h,m,c,mm,cpp,cc}"
-            ]
-        },
-        {
-            "header_mappings_dir": "mars",
-            "private_header_files": [],
-            "name": "baseevent",
-            "source_files": [
-                "mars/baseevent/*.{h,m,c,mm,cpp,cc}",
-                "mars/baseevent/src/**/*.{h,m,c,mm,cpp,cc}"
-            ]
-        },
-        {
-            "header_mappings_dir": "mars",
-            "pod_target_xcconfig": {
-                "HEADER_SEARCH_PATHS": "\"$(APP_SRC_ROOT)/\" \"$(APP_SRC_ROOT)/../\" \"$(APP_SRC_ROOT)/../../\" \"$(APP_SRC_ROOT)/../comm\"",
-                "APP_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/sdt"
-            },
-            "private_header_files": [],
-            "name": "app",
-            "source_files": [
-                "mars/app/*.{h,m,c,mm,cpp,cc}"
-            ]
-        }
-    ],
-    "name": "mars"
+    {
+      "header_mappings_dir": "mars",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(STN_SRC_ROOT)/\" \"$(STN_SRC_ROOT)/../\" \"$(STN_SRC_ROOT)/../../\" \"$(STN_SRC_ROOT)/../comm\"",
+        "STN_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/stn"
+      },
+      "private_header_files": [],
+      "name": "stn",
+      "source_files": [
+        "mars/stn/*.{h,m,c,mm,cpp,cc}",
+        "mars/stn/src/*.{h,m,c,mm,cpp,cc}",
+        "mars/stn/proto/**/*.{h}"
+      ]
+    },
+    {
+      "header_mappings_dir": "mars",
+      "pod_target_xcconfig": {
+        "SDT_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/sdt",
+        "HEADER_SEARCH_PATHS": "\"$(SDT_SRC_ROOT)/\" \"$(SDT_SRC_ROOT)/../\" \"$(SDT_SRC_ROOT)/../../\" \"$(SDT_SRC_ROOT)/src\" \"$(SDT_SRC_ROOT)/../comm\""
+      },
+      "private_header_files": [],
+      "name": "sdt",
+      "source_files": [
+        "mars/sdt/*.{h,m,c,mm,cpp,cc}",
+        "mars/sdt/src/**/*.{h,m,c,mm,cpp,cc}"
+      ]
+    },
+    {
+      "header_mappings_dir": "mars",
+      "pod_target_xcconfig": {
+        "LOG_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/sdt",
+        "HEADER_SEARCH_PATHS": "\"$(LOG_SRC_ROOT)/\" \"$(LOG_SRC_ROOT)/../\" \"$(LOG_SRC_ROOT)/../../\" \"$(LOG_SRC_ROOT)/src\" \"$(LOG_SRC_ROOT)/../comm\""
+      },
+      "private_header_files": [],
+      "name": "log",
+      "source_files": [
+        "mars/log/*.{h,m,c,mm,cpp,cc}",
+        "mars/log/src/**/*.{h,m,c,mm,cpp,cc}"
+      ]
+    },
+    {
+      "header_mappings_dir": "mars",
+      "private_header_files": [],
+      "name": "baseevent",
+      "source_files": [
+        "mars/baseevent/*.{h,m,c,mm,cpp,cc}",
+        "mars/baseevent/src/**/*.{h,m,c,mm,cpp,cc}"
+      ]
+    },
+    {
+      "header_mappings_dir": "mars",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(APP_SRC_ROOT)/\" \"$(APP_SRC_ROOT)/../\" \"$(APP_SRC_ROOT)/../../\" \"$(APP_SRC_ROOT)/../comm\"",
+        "APP_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/sdt"
+      },
+      "private_header_files": [],
+      "name": "app",
+      "source_files": [
+        "mars/app/*.{h,m,c,mm,cpp,cc}"
+      ]
+    }
+  ],
+  "name": "mars"
 }

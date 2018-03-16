@@ -53,7 +53,7 @@
         "mars/comm/messagequeue/*.{h,m,c,mm,cpp,cc}",
         "mars/comm/dns/*.{h,m,c,mm,cpp,cc}",
         "mars/comm/coroutine/*.{h,m,c,mm,cpp,cc}",
-        "mars/comm/corepattern/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/corepattern/*.{h,m,c,mm,cpp,cc,inl}",
         "mars/comm/assert/*.{h,m,c,mm,cpp,cc}",
         "mars/boost/**/*.{h,m,c,mm,cpp,cc,hpp,S}"
       ],

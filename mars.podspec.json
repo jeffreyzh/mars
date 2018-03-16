@@ -81,13 +81,13 @@
                 "mars/boost/libs/coroutine/src/*.{h,m,c,mm,cpp,cc,hpp}",
                 "mars/boost/libs/coroutine/src/detail/*.{h,m,c,mm,cpp,cc,hpp}",
                 "mars/boost/libs/coroutine/src/posix/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/bind/bind.hpp",
+                "mars/boost/bind.hpp",
                 "mars/boost/bind/*.{h,m,c,mm,cpp,cc,hpp}"
             ],
             "pod_target_xcconfig": {
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",
                 "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO",
-                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\" \"$(COMM_SRC_ROOT)/../boost\" \"$(COMM_SRC_ROOT)/../boost/bind\"",
+                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"",
                 "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
             }
         },

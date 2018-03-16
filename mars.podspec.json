@@ -87,7 +87,7 @@
             "pod_target_xcconfig": {
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",
                 "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO",
-                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"",
+                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\" \"$(COMM_SRC_ROOT)/../boost\" \"$(COMM_SRC_ROOT)/../boost/bind\"",
                 "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
             }
         },

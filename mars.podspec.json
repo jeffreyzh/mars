@@ -124,11 +124,6 @@
     },
     "source_files": [],
     "summary": "mars",
-    "libraries": [
-        "z",
-        "resolv",
-        "stdc++"
-    ],
     "requires_arc": true,
     "version": "10.0.1-rc.4",
     "source": {
@@ -145,10 +140,5 @@
         "GCC_PREPROCESSOR_DEFINITIONS": "\"$(inherited)\" \"COCOAPODS=1\" \"PB_NO_PACKED_STRUCTS=1\""
     },
     "homepage": "http://gitlab.mogujie.org/mwp/mars",
-    "frameworks": [
-        "SystemConfiguration",
-        "Foundation",
-        "CoreTelephony"
-    ],
     "name": "mars"
 }

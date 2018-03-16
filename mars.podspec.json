@@ -81,7 +81,7 @@
                 "mars/boost/libs/coroutine/src/*.{h,m,c,mm,cpp,cc,hpp}",
                 "mars/boost/libs/coroutine/src/detail/*.{h,m,c,mm,cpp,cc,hpp}",
                 "mars/boost/libs/coroutine/src/posix/*.{h,m,c,mm,cpp,cc,hpp}",
-                "mars/boost/bind/bind.hpp"
+                "mars/boost/bind/bind.hpp",
                 "mars/boost/bind/*.{h,m,c,mm,cpp,cc,hpp}"
             ],
             "pod_target_xcconfig": {

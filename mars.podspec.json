@@ -7,10 +7,10 @@
     "name": "mars",
     "summary": "mars",
     "requires_arc": true,
-    "version": "10.0.2-rc.3",
+    "version": "10.0.2-rc.4",
     "source": {
         "git": "http://gitlab.mogujie.org/mwp/mars.git",
-        "tag": "10.0.2-rc.3",
+        "tag": "10.0.2-rc.4",
         "submodules": true
     },
     "homepage": "http://gitlab.mogujie.org/mwp/mars",

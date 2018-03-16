@@ -92,9 +92,9 @@
                 "mars/boost/ref.hpp",
                 "mars/boost/core/ref.hpp",
                 "mars/boost/core/addressof.hpp",
-                "boost/core/enable_if.hpp",
-                "boost/core/is_same.hpp",
-                "boost/utility/addressof.hpp"
+                "mars/boost/core/enable_if.hpp",
+                "mars/boost/core/is_same.hpp",
+                "mars/boost/utility/addressof.hpp"
             ],
             "pod_target_xcconfig": {
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",

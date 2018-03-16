@@ -2,24 +2,26 @@
     "public_header_files": [], 
     "description": "mars", 
     "license": "MIT", 
-    "platforms": {
-        "ios": "7.0"
-    }, 
+    "requires_arc": true, 
     "xcconfig": {
         "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
     }, 
-    "source_files": [], 
+    "authors": {
+        "gairui": "gairui@mogujie.com"
+    }, 
     "summary": "mars", 
     "libraries": [
         "z", 
         "resolv", 
         "stdc++"
     ], 
-    "requires_arc": true, 
-    "version": "10.0.1-rc.9", 
+    "platforms": {
+        "ios": "7.0"
+    }, 
+    "version": "10.0.1-rc.10", 
     "source": {
         "git": "http://gitlab.mogujie.org/mwp/MWCS-Client.git", 
-        "tag": "10.0.1-rc.9", 
+        "tag": "10.0.1-rc.10", 
         "submodules": true
     }, 
     "frameworks": [
@@ -27,9 +29,7 @@
         "Foundation", 
         "CoreTelephony"
     ], 
-    "authors": {
-        "gairui": "gairui@mogujie.com"
-    }, 
+    "source_files": [], 
     "pod_target_xcconfig": {
         "GCC_WARN_ABOUT_MISSING_PROTOTYPES": "NO", 
         "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
@@ -82,9 +82,9 @@
                 "mars/boost/libs/coroutine/src/posix/*.{h,m,c,mm,cpp,cc,hpp}"
             ], 
             "pod_target_xcconfig": {
-                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"", 
-                "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO", 
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO", 
+                "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO", 
+                "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"", 
                 "COMM_SRC_ROOT": "$(PODS_TARGET_SRCROOT)/mars/comm"
             }
         }, 

@@ -58,6 +58,9 @@
         "mars/comm/crypt/*.{h,m,c,mm,cpp,cc}",
         "mars/boost/**/*.{h,m,c,mm,cpp,cc,hpp,S,ipp}"
       ],
+      "exclude_files": [
+        "mars/boost/libs/context/src/asm"
+      ],
       "pod_target_xcconfig": {
         "CLANG_WARN_STRICT_PROTOTYPES": "NO",
         "CLANG_WARN_DOCUMENTATION_COMMENTS": "NO",

@@ -59,7 +59,14 @@
         "mars/boost/**/*.{h,m,c,mm,cpp,cc,hpp,S,ipp}"
       ],
       "exclude_files": [
-        "mars/boost/libs/context/src/asm"
+        "mars/boost/libs/context/src/asm",
+        "mars/boost/libs/context/src/windows",
+        "mars/boost/libs/coroutine/src/windows",
+        "mars/boost/libs/thread/src/windows",
+        "mars/boost/libs/thread/src/win32",
+        "mars/boost/thread/win32",
+        "mars/boost/context/windows",
+        "mars/boost/coroutine/windows"
       ],
       "pod_target_xcconfig": {
         "CLANG_WARN_STRICT_PROTOTYPES": "NO",
@@ -105,7 +112,8 @@
       "name": "log",
       "source_files": [
         "mars/log/*.{h,m,c,mm,cpp,cc}",
-        "mars/log/src/**/*.{h,m,c,mm,cpp,cc}"
+        "mars/log/src/**/*.{h,m,c,mm,cpp,cc}",
+        "mars/log/crypt/**/*.{h,m,c,mm,cpp,cc,inc}"
       ]
     },
     {

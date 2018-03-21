@@ -15,4 +15,5 @@
 #include "../windows/thread/mutex.h"
 #else
 #include "../unix/thread/mutex.h"
+using namespace mars::comm;
 #endif

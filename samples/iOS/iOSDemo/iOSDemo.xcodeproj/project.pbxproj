@@ -68,6 +68,7 @@
 		1FDE37E01DE5DC7900CAC712 /* CGITask.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FDE37DF1DE5DC7900CAC712 /* CGITask.mm */; };
 		4BDBD14B1E07F611006C62F5 /* NetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BDBD14A1E07F611006C62F5 /* NetworkStatus.m */; };
 		4BDBD16C1E0912AD006C62F5 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB577871CE20FA300ADCF8C /* libresolv.9.tbd */; };
+		FF187EBB2062396A007A7B17 /* libmars-open-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF187EB8206232AF007A7B17 /* libmars-open-iphone.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF187EBB2062396A007A7B17 /* libmars-open-iphone.a in Frameworks */,
 				4BDBD16C1E0912AD006C62F5 /* libresolv.9.tbd in Frameworks */,
 				1FB577861CE20F7D00ADCF8C /* SystemConfiguration.framework in Frameworks */,
 				1FB577821CE20F1400ADCF8C /* libz.tbd in Frameworks */,

@@ -1,17 +1,17 @@
 PODS:
-  - mars (10.0.2-rc.5):
-    - mars/app (= 10.0.2-rc.5)
-    - mars/baseevent (= 10.0.2-rc.5)
-    - mars/comm (= 10.0.2-rc.5)
-    - mars/log (= 10.0.2-rc.5)
-    - mars/sdt (= 10.0.2-rc.5)
-    - mars/stn (= 10.0.2-rc.5)
-  - mars/app (10.0.2-rc.5)
-  - mars/baseevent (10.0.2-rc.5)
-  - mars/comm (10.0.2-rc.5)
-  - mars/log (10.0.2-rc.5)
-  - mars/sdt (10.0.2-rc.5)
-  - mars/stn (10.0.2-rc.5)
+  - mars (10.0.3-rc.4):
+    - mars/app (= 10.0.3-rc.4)
+    - mars/baseevent (= 10.0.3-rc.4)
+    - mars/comm (= 10.0.3-rc.4)
+    - mars/log (= 10.0.3-rc.4)
+    - mars/sdt (= 10.0.3-rc.4)
+    - mars/stn (= 10.0.3-rc.4)
+  - mars/app (10.0.3-rc.4)
+  - mars/baseevent (10.0.3-rc.4)
+  - mars/comm (10.0.3-rc.4)
+  - mars/log (10.0.3-rc.4)
+  - mars/sdt (10.0.3-rc.4)
+  - mars/stn (10.0.3-rc.4)
 
 DEPENDENCIES:
   - mars (from `../`)
@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  mars: 1945ab1a0c1db7e760d3b90be4a44aa698434db0
+  mars: 70d729cf9a481dc98d243998cc2af4ed54ffc734
 
 PODFILE CHECKSUM: 2199bd5d64124edb45378ff69d3abd5a62e482c8
 

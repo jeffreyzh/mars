@@ -56,6 +56,7 @@
         "mars/comm/corepattern/*.{h,m,c,mm,cpp,cc,inl}",
         "mars/comm/assert/*.{h,m,c,mm,cpp,cc}",
         "mars/comm/crypt/*.{h,m,c,mm,cpp,cc}",
+        "mars/comm/debugger/*.{h,m,c,mm,cpp,cc,inl}",
         "mars/boost/**/*.{h,m,c,mm,cpp,cc,hpp,S,ipp}"
       ],
       "exclude_files": [
@@ -85,8 +86,7 @@
       "name": "stn",
       "source_files": [
         "mars/stn/*.{h,m,c,mm,cpp,cc}",
-        "mars/stn/src/*.{h,m,c,mm,cpp,cc}",
-        "mars/stn/proto/**/*.{h}"
+        "mars/stn/src/*.{h,m,c,mm,cpp,cc}"
       ]
     },
     {

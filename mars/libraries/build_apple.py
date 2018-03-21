@@ -152,8 +152,8 @@ def build_apple(project, save_path):
                     os.system("ar -cur %s %s/%s/*.o 2>/dev/null" %(cpu_lib_path, obj_folders, cpu_folder))
                 else:
                     os.system("ar -q %s %s/%s/*.o 2>/dev/null" %(cpu_lib_path, obj_folders, cpu_folder))
-                if cf=="openssl":
-                    link_openssl(cpu_lib_path, cpu_folder)
+#                if cf=="openssl":
+#                    link_openssl(cpu_lib_path, cpu_folder)
 
 
     framework_path = save_path + "/" + project.framework_name

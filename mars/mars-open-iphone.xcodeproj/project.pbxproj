@@ -67,13 +67,6 @@
 			remoteGlobalIDString = 3170A026177887B0004F5DDA;
 			remoteInfo = sdt;
 		};
-		5587E86A1C731962000009B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55AC98BE1C72FFE7007F9F97 /* openssl.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3170A026177887B0004F5DDA;
-			remoteInfo = openssl;
-		};
 		55A8D1C91C8D5D4D0057DD59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55A8D1C51C8D5D4C0057DD59 /* app.xcodeproj */;
@@ -102,13 +95,6 @@
 			remoteGlobalIDString = 3170A026177887B0004F5DDA;
 			remoteInfo = app;
 		};
-		55AC98C21C72FFE7007F9F97 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55AC98BE1C72FFE7007F9F97 /* openssl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3170A027177887B0004F5DDA;
-			remoteInfo = openssl;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,7 +118,6 @@
 		3170A02A177887B0004F5DDA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55A8D1C51C8D5D4C0057DD59 /* app.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.xcodeproj; path = app/app.xcodeproj; sourceTree = "<group>"; };
 		55A8D1CB1C8D5D540057DD59 /* baseevent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = baseevent.xcodeproj; path = baseevent/baseevent.xcodeproj; sourceTree = "<group>"; };
-		55AC98BE1C72FFE7007F9F97 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openssl.xcodeproj; path = openssl/openssl.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +171,6 @@
 				55A8D1CB1C8D5D540057DD59 /* baseevent.xcodeproj */,
 				55A8D1C51C8D5D4C0057DD59 /* app.xcodeproj */,
 				1F37A35C1C7E0B1100A9780B /* stn.xcodeproj */,
-				55AC98BE1C72FFE7007F9F97 /* openssl.xcodeproj */,
 				1371BF9D19791FE800E4C614 /* log.xcodeproj */,
 				1371BF9119791FD700E4C614 /* comm.xcodeproj */,
 				3170A029177887B0004F5DDA /* Frameworks */,
@@ -226,14 +210,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		55AC98BF1C72FFE7007F9F97 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				55AC98C31C72FFE7007F9F97 /* libopenssl.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -253,7 +229,6 @@
 				55A8D1D21C8D5D5E0057DD59 /* PBXTargetDependency */,
 				55A8D1D41C8D5D5E0057DD59 /* PBXTargetDependency */,
 				1F37A3631C7E0B2000A9780B /* PBXTargetDependency */,
-				5587E86B1C731962000009B4 /* PBXTargetDependency */,
 				1371BFDC197920A100E4C614 /* PBXTargetDependency */,
 				1371BFE0197920A100E4C614 /* PBXTargetDependency */,
 			);
@@ -297,10 +272,6 @@
 				{
 					ProductGroup = 1371BF9E19791FE800E4C614 /* Products */;
 					ProjectRef = 1371BF9D19791FE800E4C614 /* log.xcodeproj */;
-				},
-				{
-					ProductGroup = 55AC98BF1C72FFE7007F9F97 /* Products */;
-					ProjectRef = 55AC98BE1C72FFE7007F9F97 /* openssl.xcodeproj */;
 				},
 				{
 					ProductGroup = 1FD4FAAF1C999CC100125228 /* Products */;
@@ -361,13 +332,6 @@
 			remoteRef = 55A8D1CF1C8D5D550057DD59 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		55AC98C31C72FFE7007F9F97 /* libopenssl.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libopenssl.a;
-			remoteRef = 55AC98C21C72FFE7007F9F97 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -417,11 +381,6 @@
 			isa = PBXTargetDependency;
 			name = sdt;
 			targetProxy = 1FD4FAB41C999D2200125228 /* PBXContainerItemProxy */;
-		};
-		5587E86B1C731962000009B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = openssl;
-			targetProxy = 5587E86A1C731962000009B4 /* PBXContainerItemProxy */;
 		};
 		55A8D1D21C8D5D5E0057DD59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -60,13 +60,17 @@ public:
     static const uint32_t kNoopTaskID = 0xFFFFFFFF;
     static const uint32_t kLongLinkIdentifyCheckerTaskID = 0xFFFFFFFE;
     static const uint32_t kSignallingKeeperTaskID = 0xFFFFFFFD;
-    
-    
-    Task();
+	static const uint32_t kConnectionTaskID = 0xFFFFFFEF;
+	static const uint32_t kGoawayTaskID = 0xFFFFFFEE;
+	static const uint32_t kRstTaskID = 0xFFFFFFED;
+	static const uint32_t kPushTaskID = 0xFFFFFFEC;
+
+	Task();
     Task(uint32_t _taskid);
 
     //require
     uint32_t       taskid;
+    uint32_t       streamid;
     uint32_t       cmdid;
     uint64_t       channel_id;
     int32_t        channel_select;
@@ -117,6 +121,8 @@ enum ErrCmdType {
 	kEctServer = 8,
 	kEctLocal = 9,
     kEctCanceld = 10,
+    kEctHandshadke = 101,
+    kEctNghttp2 = 102,
 };
 
 //error code

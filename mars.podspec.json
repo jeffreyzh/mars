@@ -5,7 +5,7 @@
   "license": "MIT",
   "requires_arc": true,
   "xcconfig": {
-    "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1"
+    "GCC_PREPROCESSOR_DEFINITIONS": "HAVE_CONFIG_H=1 NDEBUG=1 XLOGGER_TAG='\"mars::\"'"
   },
   "source_files": [],
   "summary": "mars",

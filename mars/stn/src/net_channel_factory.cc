@@ -25,6 +25,10 @@
 #include "longlink.h"
 #include "shortlink.h"
 
+
+//TODO
+#include "client-mars/mwcs_long_link.h"
+
 namespace mars {
 namespace stn {
 
@@ -49,7 +53,7 @@ namespace LongLinkChannelFactory {
 
 LongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource)
 = [](const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource) -> LongLink* {
-	return new LongLink(_messagequeueid, _netsource);
+	return new MWCSLongLink(_messagequeueid, _netsource);
 };
 
 void (*Destory)(LongLink* _long_link_channel)

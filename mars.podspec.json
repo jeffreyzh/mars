@@ -95,7 +95,6 @@
                 "mars/boost/config/no_tr1/memory.hpp",
                 "mars/boost/smart_ptr/*.{hpp}",
                 "mars/boost/smart_ptr/detail/*.{hpp}",
-                "mars/boost/core/checked_delete.hpp",
                 "mars/boost/detail/*.{hpp}",
                 "mars/boost/core/*.{hpp}",
                 "mars/boost/predef/*.{h,hpp}",
@@ -128,7 +127,8 @@
                 "mars/boost/align/**/*.{hpp}",
                 "mars/boost/iostreams/**/*.{hpp,cpp}",
                 "mars/boost/range/**/*.{hpp,cpp}",
-                "mars/boost/concept/**/*.{hpp,cpp}"
+                "mars/boost/concept/**/*.{hpp,cpp}",
+                "mars/boost/filesystem/**/*.{hpp,cpp}"
             ],
             "pod_target_xcconfig": {
                 "HEADER_SEARCH_PATHS": "\"$(COMM_SRC_ROOT)/\" \"$(COMM_SRC_ROOT)/../\" \"$(COMM_SRC_ROOT)/../../\"",

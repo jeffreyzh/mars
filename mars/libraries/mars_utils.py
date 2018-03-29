@@ -20,7 +20,7 @@ APPLE_COPY_EXT_FILES = {"stn/proto/longlink_packer.h": "longlink_packer.h",
         "stn/proto/shortlink_packer.h": "shortlink_packer.h",
         "stn/proto/shortlink_packer.cc": "shortlink_packer.cc.rewriteme",
         }
-        
+
 WIN_COPY_EXT_FILES = {"stn/proto/longlink_packer.h": "longlink_packer.h",
         "stn/proto/longlink_packer.cc": "longlink_packer.cc.rewriteme",
         "stn/proto/stnproto_logic.h": "stnproto_logic.h",
@@ -177,11 +177,13 @@ def get_revision(path):
     revision = os.popen("git rev-parse --short HEAD").read()
     if revision:
         return "git-" + revision[:len(revision)-1]
-    
+
     return ""
 
-
 def copy_files(src_path, dst_header_path, framework_path, ext_files, child_project_folder=[]):
+    copy_files(src_path, dst_header_path, framework_path, ext_files, None, child_project_folder)
+
+def copy_files(src_path, dst_header_path, framework_path, ext_files,ext_files_2,child_project_folder=[]):
     COPY_HEADER_FILES = {"comm/verinfo.h": "comm",
             "comm/autobuffer.h": "comm",
             "comm/http.h": "comm",
@@ -227,6 +229,10 @@ def copy_files(src_path, dst_header_path, framework_path, ext_files, child_proje
             os.makedirs(framework_path + "/" + dst[:dst.rfind("/")])
         shutil.copy(src_path + "/" + src, framework_path + "/" + dst)
 
+    for (src, dst) in ext_files_2.items():
+        if dst.rfind("/") != -1 and not os.path.exists(framework_path + "/" + dst[:dst.rfind("/")]):
+            os.makedirs(framework_path + "/" + dst[:dst.rfind("/")])
+        shutil.copy(src_path + "/" + src, framework_path + "/" + "mars.framework/Headers" + "/" + dst)
     #shutil.copy("Readme.md", framework_path)
 
 def check_python_version():
@@ -246,7 +252,7 @@ def check_ndk_env():
 
     if "Windows" == system:
         delimiter = ";"
-        
+
     path_array = path_env.split(delimiter)
 
     ndk_path = None
@@ -263,7 +269,7 @@ def check_ndk_env():
         return False
 
     ndk_revision = None
-    
+
     f = open(os.path.join(ndk_path, "source.properties"))
     line = f.readline()
     while line:
@@ -285,12 +291,12 @@ def check_ndk_env():
 
     print("Error: make sure ndk's version >= r11c")
     return False
-    
+
 
 def check_env():
 
     return check_python_version() and check_ndk_env()
-    
+
 
 
 def main(save_path, tag):

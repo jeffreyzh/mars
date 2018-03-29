@@ -11,6 +11,31 @@ from mars_utils import *
 
 LIBRARIES_PATH = os.path.split(os.path.realpath(__file__))[0]
 
+MEILI_APPLE_COPY_EXT_FILES = {
+        "baseevent/active_logic.h":"baseevent/active_logic.h",
+        "stn/src/longlink.h":"stn/src/longlink.h",
+        "stn/task_profile.h":"stn/task_profile.h",
+        "stn/src/net_source.h":"stn/src/net_source.h",
+        "stn/config.h":"stn/config.h",
+        "stn/src/longlink_identify_checker.h":"stn/src/longlink_identify_checker.h",
+        "comm/messagequeue/message_queue.h":"comm/messagequeue/message_queue.h",
+        "comm/socket/socket_address.h":"comm/socket/socket_address.h",
+        "comm/socket/getsocktcpinfo.h":"comm/socket/getsocktcpinfo.h",
+        "comm/thread/mutex.h":"comm/thread/mutex.h",
+        "comm/thread/thread.h":"comm/thread/thread.h",
+        "comm/alarm.h":"comm/alarm.h",
+        "comm/tickcount.h":"comm/tickcount.h",
+        "comm/move_wrapper.h":"comm/move_wrapper.h",
+        "comm/singleton.h":"comm/singleton.h",
+        "comm/time_utils.h":"comm/time_utils.h",
+        "comm/comm_data.h":"comm/comm_data.h",
+        "comm/assert/__assert.h":"comm/assert/__assert.h",
+        "comm/unix/socket/socketselect.h":"comm/unix/socket/socketselect.h",
+        "comm/unix/socket/socketpoll.h":"comm/unix/socket/socketpoll.h",
+        "comm/unix/socket/socketbreaker.h":"comm/unix/socket/socketbreaker.h",
+        "boost/signals2.hpp":"boost/signals2.hpp",
+        "boost/function.hpp":"boost/function.hpp"
+        }
 
 class Project:
     def __init__(self, path, platform, platform_folders, des_lib_name, framework_name, other_cflags):
@@ -80,12 +105,12 @@ def link_openssl(output_lib_path, cpu_folder):
     os.system("ar -x %s/%s/libcrypto.a" % (openssl_lib_folder, cpu_folder))
     os.system("ar -x %s/%s/libssl.a" % (openssl_lib_folder, cpu_folder))
     os.chdir(old_path)
-    
+
     if not os.path.isfile(output_lib_path):
         os.system("ar -cur %s %s/%s/*.o 2>/dev/null" %(output_lib_path, openssl_lib_folder, cpu_folder))
     else:
         os.system("ar -q %s %s/%s/*.o 2>/dev/null" %(output_lib_path, openssl_lib_folder, cpu_folder))
-    
+
     os.system("rm -rf %s/%s" % (openssl_lib_folder, cpu_folder))
 
 def build_apple(project, save_path):
@@ -112,7 +137,6 @@ def build_apple(project, save_path):
         if ret:
             print("\033[0;31;40m!!!!clean %s failed!!!\033[0m" %(target))
             return False
-
         if "simulator" in target:
             ret = os.system("xcodebuild  -sdk %s -configuration Release -project %s" %(target, project.path))
         else:
@@ -122,7 +146,7 @@ def build_apple(project, save_path):
             print("\033[0;31;40m!!!!build %s failed!!!\033[0m" %(target))
             return False
 
-    
+
     save_path = os.path.join(LIBRARIES_PATH, save_path + "/" + os.path.splitext(os.path.split(project.path)[1])[0] + project.other_cflags)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -133,7 +157,7 @@ def build_apple(project, save_path):
     cpu_num = 0
 
     (child_folders, child_projects) = get_child_project(project.path)
- 
+
     for i, cf in enumerate(child_folders):
         print("merging %s..........." %(cf))
         for pf in project.platform_folders:
@@ -152,42 +176,40 @@ def build_apple(project, save_path):
                     os.system("ar -cur %s %s/%s/*.o 2>/dev/null" %(cpu_lib_path, obj_folders, cpu_folder))
                 else:
                     os.system("ar -q %s %s/%s/*.o 2>/dev/null" %(cpu_lib_path, obj_folders, cpu_folder))
-                if cf=="openssl":
-                    link_openssl(cpu_lib_path, cpu_folder)
+                # if cf=="openssl":
+                    # link_openssl(cpu_lib_path, cpu_folder)
 
 
     framework_path = save_path + "/" + project.framework_name
     if not os.path.exists(framework_path):
         os.mkdir(framework_path)
 
-    
+
     print("ranlib ing..............")
     os.system("ranlib %s/*.a 2>/dev/null" %(save_path))
     print("lipo ing..............")
     os.system("lipo -create '%s/'*.a -output %s/%s" %(save_path, framework_path, project.des_lib_name))
     print("rming tmp files........")
     os.system("rm -r '%s/'*.a" %(save_path))
-    copy_files(RELATIVE_PATH, framework_path + "/Headers", save_path, APPLE_COPY_EXT_FILES, child_folders)
+    copy_files(RELATIVE_PATH, framework_path + "/Headers", save_path, MEILI_APPLE_COPY_EXT_FILES, APPLE_COPY_EXT_FILES, child_folders)
 
     return True
-      
+
 
 def main():
-    
+
     if not check_python_version():
         return
 
-    # if 2 <= len(sys.argv):
-        # prefix = sys.argv[1]
-    # else:
-        # prefix = raw_input("input prefix for save directory. like `trunk`,`br`,`tag`: ").strip()
-    
-    prefix = "prefix"
+    if 2 <= len(sys.argv):
+        prefix = sys.argv[1]
+    else:
+        prefix = raw_input("input prefix for save directory. like `trunk`,`br`,`tag`: ").strip()
+
     save_path = prefix + "_[%s]@%s@%s" % (time.strftime('%Y-%m-%d_%H.%M', time.localtime()), get_revision(RELATIVE_PATH), getpass.getuser())
-    
+
     while True:
-        num = "1"
-        # num = raw_input("\033[0;33mEnter menu:\n1. build mars for iphone.\n2. build mars for iphone with bitcode.\n3. build xlog for iphone\n4. build mars for macosx.\n5. build all.\n6. exit.\033[0m\n").strip()
+        num = raw_input("\033[0;33mEnter menu:\n1. build mars for iphone.\n2. build mars for iphone with bitcode.\n3. build xlog for iphone\n4. build mars for macosx.\n5. build all.\n6. exit.\033[0m\n").strip()
         if num == "1" or num == "2" or num == "3" or num == "4":
             build_apple(APPLE_PROJECTS[int(num)-1], save_path)
             return
@@ -203,7 +225,7 @@ def main():
 
 if __name__ == "__main__":
     before_time = time.time()
-    
+
     main()
 
     after_time = time.time()

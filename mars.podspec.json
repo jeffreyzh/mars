@@ -162,7 +162,8 @@
             "name": "stn",
             "source_files": [
                 "mars/stn/*.{h,m,c,mm,cpp,cc}",
-                "mars/stn/src/*.{h,m,c,mm,cpp,cc}"
+                "mars/stn/src/*.{h,m,c,mm,cpp,cc}",
+                "mars/stn/proto/*.{h}"
             ]
         },
         {

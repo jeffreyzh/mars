@@ -80,8 +80,8 @@ void SdtCore::__InitCheckReq(CheckIPPorts& _longlink_items, CheckIPPorts& _short
 	check_request_.total_timeout = _timeout;
 
     if (MODE_BASIC(_mode)) {
-//        PingChecker* ping_checker = new PingChecker();
-//        check_list_.push_back(ping_checker);
+        PingChecker* ping_checker = new PingChecker();
+        check_list_.push_back(ping_checker);
         DnsChecker* dns_checker = new DnsChecker();
         check_list_.push_back(dns_checker);
     }

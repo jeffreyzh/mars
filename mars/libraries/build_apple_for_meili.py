@@ -191,7 +191,7 @@ def build_apple(project, save_path):
     os.system("lipo -create '%s/'*.a -output %s/%s" %(save_path, framework_path, project.des_lib_name))
     print("rming tmp files........")
     os.system("rm -r '%s/'*.a" %(save_path))
-    copy_files(RELATIVE_PATH, framework_path + "/Headers", save_path, MEILI_APPLE_COPY_EXT_FILES, APPLE_COPY_EXT_FILES, child_folders)
+    copy_files(RELATIVE_PATH, framework_path + "/Headers", save_path, APPLE_COPY_EXT_FILES, MEILI_APPLE_COPY_EXT_FILES, child_folders)
 
     return True
 

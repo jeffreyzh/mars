@@ -131,7 +131,8 @@
                 "mars/boost/filesystem/**/*.{hpp,cpp}",
                 "mars/boost/system/**/*.{hpp,cpp}",
                 "mars/boost/io/**/*.{hpp,cpp}",
-                "mars/boost/exception/**/*.{hpp,cpp}"
+                "mars/boost/exception/**/*.{hpp,cpp}",
+                "mars/boost/coroutine/**/*.{hpp,cpp}"
             ],
             "pod_target_xcconfig": {
                 "CLANG_WARN_STRICT_PROTOTYPES": "NO",

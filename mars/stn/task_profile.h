@@ -104,6 +104,11 @@ struct ConnectProfile {
         noop_profiles.clear();
         if (extension_ptr)
         		extension_ptr->Reset();
+
+        //额外添加 tls
+        secure_conn_start_time=0;
+        secure_conn_end_time=0;
+        int secure_conn_errcode =0;
     }
     
     std::string net_type;
@@ -140,6 +145,11 @@ struct ConnectProfile {
 
     boost::shared_ptr<ProfileExtension> extension_ptr;
     mars::comm::ProxyInfo proxy_info;
+
+    //额外添加
+    uint64_t secure_conn_start_time; //ms
+    uint64_t secure_conn_end_time; //ms
+    int secure_conn_errcode;
 };
 
         

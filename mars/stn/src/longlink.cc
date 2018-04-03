@@ -544,8 +544,16 @@ SOCKET LongLink::__RunConnect(ConnectProfile& _conn_profile) {
     _conn_profile.local_ip = socket_address::getsockname(sock).ip();
     _conn_profile.local_port = socket_address::getsockname(sock).port();
 
+    //握手的时间
+    _conn_profile.secure_conn_start_time = gettickcount();
+
     //SSL/TLS/MLS 握手
     int ret = secureLayerHandshake(sock, _conn_profile);
+
+    _conn_profile.secure_conn_errcode = ret;
+    _conn_profile.secure_conn_end_time = gettickcount();
+    __UpdateProfile(_conn_profile);
+
     if (ret != kEctOK) {
         xerror2(TSF"secure layer handshake failed, reason:%_", ret);
 

@@ -229,10 +229,11 @@ def copy_files(src_path, dst_header_path, framework_path, ext_files,ext_files_2,
             os.makedirs(framework_path + "/" + dst[:dst.rfind("/")])
         shutil.copy(src_path + "/" + src, framework_path + "/" + dst)
 
-    for (src, dst) in ext_files_2.items():
-        if dst.rfind("/") != -1 and not os.path.exists(framework_path + "/" + dst[:dst.rfind("/")]):
-            os.makedirs(framework_path + "/" + dst[:dst.rfind("/")])
-        shutil.copy(src_path + "/" + src, framework_path + "/" + "mars.framework/Headers" + "/" + dst)
+    # for (src, dst) in ext_files_2.items():
+    #     if dst.rfind("/") != -1 and not os.path.exists(framework_path + "/" + dst[:dst.rfind("/")]):
+    #         os.makedirs(framework_path + "/" + dst[:dst.rfind("/")])
+    #     shutil.copy(src_path + "/" + src, framework_path + "/" + "mars.framework/Headers" + "/" + dst)
+
     #shutil.copy("Readme.md", framework_path)
 
 def check_python_version():

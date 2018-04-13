@@ -108,7 +108,6 @@ struct ConnectProfile {
         //额外添加 tls
         secure_conn_start_time=0;
         secure_conn_end_time=0;
-        int secure_conn_errcode =0;
     }
     
     std::string net_type;
@@ -149,7 +148,6 @@ struct ConnectProfile {
     //额外添加
     uint64_t secure_conn_start_time; //ms
     uint64_t secure_conn_end_time; //ms
-    int secure_conn_errcode;
 };
 
         

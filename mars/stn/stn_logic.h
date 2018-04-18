@@ -64,7 +64,6 @@ namespace stn{
         //长连信令校验回包 
         virtual bool OnLonglinkIdentifyResponse(const AutoBuffer& _response_buffer, const AutoBuffer& _identify_buffer_hash) = 0;
         
-        
         virtual void RequestSync() = 0;
         
     };

@@ -52,7 +52,7 @@ namespace mars_boost {} namespace boost = mars_boost; namespace mars_boost
             for (async_states_t::iterator i = async_states_.begin(), e = async_states_.end();
                     i != e; ++i)
             {
-                (*i)->make_ready();
+//                (*i)->make_ready();//Commented by gairui，issue on iOS："Member access into incomplete type 'mars_boost::detail::shared_state_base'" https://svn.boost.org/trac10/ticket/10558#no3
             }
         }
 

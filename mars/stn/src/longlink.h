@@ -84,6 +84,7 @@ class LongLink {
         kConnectFailed,
     };
 
+
     // Note: Never Delete Item!!!Just Add!!!
     enum TDisconnectInternalCode {
         kNone = 0,
@@ -111,6 +112,7 @@ class LongLink {
 
   public:
     boost::signals2::signal<void (TLongLinkStatus _connectStatus)> SignalConnection;
+    boost::signals2::signal<void (const ConnectProfile& _connprofile,TLongLinkStatus _connectStatus)> SignalConnection2;
     boost::signals2::signal<void (const ConnectProfile& _connprofile)> broadcast_linkstatus_signal_;
     
     boost::function< void (uint32_t _taskid)> OnSend;

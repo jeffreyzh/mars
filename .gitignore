@@ -99,3 +99,32 @@ xcshareddata
 *.pdb
 mars/win32proj/Debug/mars.lastbuildstate
 mars/win32proj/Debug/mars.unsuccessfulbuild
+
+# add by gairui
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+profile
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+
+# Bundler
+.bundle
+
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+Carthage/Build
+
+Pods/

@@ -2,10 +2,10 @@
 #ifndef Mars_verinfo_h
 #define Mars_verinfo_h
 
-#define MARS_REVISION "f685e74"
-#define MARS_PATH "master"
+#define MARS_REVISION "a2abcfe"
+#define MARS_PATH "feature/mwcs_iOS"
 #define MARS_URL ""
-#define MARS_BUILD_TIME "2017-10-12 18:37:49"
-#define MARS_TAG "mars_xlog_sdk/mars_libs"
+#define MARS_BUILD_TIME "2018-04-13 15:15:33"
+#define MARS_TAG "315_[2018-04-13_15.15]@git-a2abcfe@gairui"
 
 #endif

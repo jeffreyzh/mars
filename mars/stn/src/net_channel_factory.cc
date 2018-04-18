@@ -30,6 +30,7 @@
 namespace mars {
 namespace stn {
 
+    
 namespace ShortLinkChannelFactory {
 
     
@@ -49,9 +50,19 @@ void (*Destory)(ShortLinkInterface* _short_link_channel)
 
 namespace LongLinkChannelFactory {
 
-MWCSLongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource)
-= [](const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource) -> MWCSLongLink* {
-	return new MWCSLongLink(_messagequeueid, _netsource);
+static LongLinkChannelCreator long_link_channel_creater = NULL;
+void (*SetCustomLongLinkChannel)(LongLinkChannelCreator _long_link_channel_creater)
+=[](LongLinkChannelCreator _long_link_channel_creater){
+  long_link_channel_creater = _long_link_channel_creater;
+};
+
+LongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource)
+= [](const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource) -> LongLink* {
+
+  if(long_link_channel_creater!=NULL){
+    return long_link_channel_creater(_messagequeueid,_netsource);
+  }
+  return new LongLink(_messagequeueid, _netsource);
 };
 
 void (*Destory)(LongLink* _long_link_channel)
@@ -59,6 +70,7 @@ void (*Destory)(LongLink* _long_link_channel)
 	delete _long_link_channel;
 	_long_link_channel = NULL;
 };
+
 
 }
 }

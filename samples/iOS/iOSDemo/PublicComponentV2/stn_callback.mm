@@ -22,6 +22,7 @@
 
 namespace mars {
     namespace stn {
+    
         
 StnCallBack* StnCallBack::instance_ = NULL;
         

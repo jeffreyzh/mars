@@ -44,10 +44,14 @@ extern void (*Destory)(ShortLinkInterface* _short_link_channel);
 }
 
 namespace LongLinkChannelFactory {
+    
+typedef LongLink* (*LongLinkChannelCreator)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource);
 
-extern MWCSLongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource);
+extern LongLink* (*Create)(const mq::MessageQueue_t& _messagequeueid, NetSource& _netsource);
 
 extern void (*Destory)(LongLink* _long_link_channel);
+
+extern void (*SetCustomLongLinkChannel)(LongLinkChannelCreator _long_link_channel_creator);
 
 }
 

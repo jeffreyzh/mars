@@ -377,7 +377,7 @@ void LongLink::__UpdateProfile(const ConnectProfile& _conn_profile) {
     conn_profile_ = _conn_profile;
 
     if (0 != conn_profile_.disconn_time||connectstatus_==kConnected) //三种情况下会回调SignalConnection2（建链失败、建链成功、建链成功后断开）
-        STATIC_RETURN_SYNC2ASYNC_FUNC(boost::bind(boost::ref(SignalConnection2), conn_profile_, connectstatus_));
+        STATIC_RETURN_SYNC2ASYNC_FUNC(boost::bind(boost::ref(broadcast_linkstatus_signal_2_), conn_profile_, connectstatus_));
 
     if (0 != conn_profile_.disconn_time)
         STATIC_RETURN_SYNC2ASYNC_FUNC(boost::bind(boost::ref(broadcast_linkstatus_signal_), conn_profile_));

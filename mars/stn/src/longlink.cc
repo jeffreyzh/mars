@@ -340,7 +340,10 @@ bool LongLink::__NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, A
 }
 
 void LongLink::__RunResponseError(ErrCmdType _error_type, int _error_code, ConnectProfile& _profile, bool _networkreport) {
-
+    //额外增加的
+    _profile.disconn_errtype = _error_type;
+    _profile.disconn_errcode = _error_code;
+    
     AutoBuffer buf;
     AutoBuffer extension;
     OnResponse(_error_type, _error_code, 0, Task::kInvalidTaskID, buf, extension, _profile);

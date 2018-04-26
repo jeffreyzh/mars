@@ -25,6 +25,8 @@
 #include "longlink.h"
 #include "shortlink.h"
 
+#include "mwcs_long_link.h"
+
 namespace mars {
 namespace stn {
 

@@ -12,10 +12,9 @@ obj/
 xcuserdata
 xcshareddata
 
-mars/cmake-build-debug/*
+/mars/cmake-build-debug
 
 /mars/comm/verinfo.h
-/mars/libraries/*/
 /mars/*/libs/
 !/mars/boost/libs/
 /samples/iOS/iOSDemo/Kernel/MarsLib/
@@ -24,7 +23,12 @@ mars/cmake-build-debug/*
 /samples/Mac/Kernel/MarsLib/
 /samples/android/xlogSample/app/src/main/jni/export_include/*.so
 
-#!/mars/libraries/mars_android_sdk/
+/mars/libraries/mars_android_sdk/libs/*
+/mars/libraries/mars_android_sdk/so_cache/*
+/mars/libraries/mars_xlog_sdk/*
+/mars/libraries/samplelibs/*
+/mars/libraries/samplexloglibs/*
+
 /mars/app/win32proj/Debug/*.idb
 /mars/app/win32proj/Debug/*.log
 /mars/app/win32proj/Debug/*.pdb

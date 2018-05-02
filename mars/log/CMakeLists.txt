@@ -9,14 +9,16 @@ if (NOT ENABLE_ANDROID_SUPPORT)
     )
 endif ()
 
-include_directories(.)
-include_directories(..)
-include_directories(../..)
-include_directories(src)
-include_directories(crypt)
-include_directories(crypt/micro-ecc-master)
-include_directories(export_include)
-include_directories(export_include/xlogger)
+include_directories(
+        .
+        ..
+        ../..
+        src
+        crypt
+        crypt/micro-ecc-master
+        export_include
+        export_include/xlogger
+)
 
 aux_source_directory(crypt SOURCE_FILES)
 aux_source_directory(src SOURCE_FILES)

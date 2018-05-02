@@ -9,14 +9,13 @@ if (NOT ENABLE_ANDROID_SUPPORT)
     )
 endif ()
 
-include_directories(${PROJECT_SOURCE_DIR})
-include_directories(${PROJECT_SOURCE_DIR}/..)
-include_directories(${PROJECT_SOURCE_DIR}/../..)
+include_directories(..)
+include_directories(../..)
 
-aux_source_directory(./src SRC_LIST)
+aux_source_directory(src SRC_LIST)
 
 if (ENABLE_ANDROID_SUPPORT)
-aux_source_directory(./jni SRC_LIST)
+aux_source_directory(jni SRC_LIST)
 
 endif()
 

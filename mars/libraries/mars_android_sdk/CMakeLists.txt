@@ -15,13 +15,13 @@ if (NOT ENABLE_ANDROID_SUPPORT)
 endif ()
 
 include_directories(jni/longlink_packer.h jni/shortlink_packer.h)
-include_directories(.)
-include_directories(..)
-include_directories(../..)
-include_directories(../../..)
-include_directories(../../../../)
 
 include_directories(
+        .
+        ..
+        ../..
+        ../../..
+        ../../../..
         ${CMAKE_SOURCE_DIR}/mls/src/mls
         ${CMAKE_SOURCE_DIR}/mls/src/mls/mlsapi
         ${CMAKE_SOURCE_DIR}/mls/src/mls/mlsapi/mlsprotocol
@@ -38,11 +38,13 @@ set(MLS_LIB_NAME mwcs_mls)
 
 
 if (ENABLE_ANDROID_SUPPORT)
-    include_directories(../../../log)
-    include_directories(../../../log/crypt)
-    include_directories(../../../log/src)
-    include_directories(../../../log/export_include)
-    include_directories(../../../log/export_include/xlogger)
+    include_directories(
+            ../../../log
+            ../../../log/crypt
+            ../../../log/src
+            ../../../log/export_include
+            ../../../log/export_include/xlogger
+    )
 
     link_libraries(${MLS_LIB_NAME})
 

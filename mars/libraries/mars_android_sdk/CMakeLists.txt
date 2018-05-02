@@ -8,6 +8,10 @@ if (NOT ENABLE_ANDROID_SUPPORT)
             ${JAVA_INCLUDE_PATH}
     )
 
+    if (APPLE)
+        link_libraries(resolv)
+    endif()
+
 endif ()
 
 include_directories(jni/longlink_packer.h jni/shortlink_packer.h)
@@ -111,6 +115,8 @@ if (UNIX AND NOT APPLE)
             ${CMAKE_SOURCE_DIR}/third-party/sodium/libsodium.a
             )
 endif ()
+
+
 if (APPLE)
     find_library(SODIUM_LIB libsodium.a)
     target_link_libraries(mars_android_sdk ${SODIUM_LIB})

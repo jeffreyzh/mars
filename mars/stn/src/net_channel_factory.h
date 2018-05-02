@@ -22,7 +22,6 @@
 
 #include <string>
 #include <vector>
-#include <mwcs-client/client-mars/mwcs_long_link.h>
 
 #include "mars/comm/messagequeue/message_queue.h"
 

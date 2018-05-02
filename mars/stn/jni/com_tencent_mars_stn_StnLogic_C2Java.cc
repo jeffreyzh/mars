@@ -17,10 +17,7 @@
 
 #include <jni.h>
 #include <vector>
-#include <mwcs-client/client-mars/callback/mwcs_mars_callback.h>
-#include <mwcs-client/client-mars/callback/jni/mwcs_mars_jni_invocation_callback.h>
 #include <mwcs-client/client-mars/mwcs_mars.h>
-#include <mwcs-client/client-mars/mwcs_mars_request.h>
 #include <src/net_core.h>
 
 #include "mars/comm/autobuffer.h"

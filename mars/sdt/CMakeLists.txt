@@ -9,13 +9,10 @@ if (NOT ENABLE_ANDROID_SUPPORT)
     )
 endif ()
 
-include_directories(.
+include_directories(
+        .
         ..
         ../..
-        src
-        src/activecheck
-        src/checkimpl
-        src/tools
 )
 
 if (ENABLE_ANDROID_SUPPORT)

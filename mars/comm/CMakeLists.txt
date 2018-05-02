@@ -53,6 +53,11 @@ if (ENABLE_ANDROID_SUPPORT)
     #Android平台直接使用已编译好的xlog，这里去掉重复的源文件
     file(GLOB_RECURSE XLOGGER_SRC_FILES xlogger/*.c*)
     list(REMOVE_ITEM SRC_LIST ${XLOGGER_SRC_FILES})
+
+else()
+    if(APPLE)
+        aux_source_directory(objc SRC_LIST)
+    endif()
 endif ()
 
 add_library(mars_comm OBJECT ${SRC_LIST})

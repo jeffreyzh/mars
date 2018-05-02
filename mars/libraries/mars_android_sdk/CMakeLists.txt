@@ -10,6 +10,20 @@ if (NOT ENABLE_ANDROID_SUPPORT)
 
     if (APPLE)
         link_libraries(resolv)
+        find_library(corefoundation_lib CoreFoundation)
+        find_library(foundation_lib Foundation)
+        find_library(cfnetwork_lib CFNetwork)
+        find_library(system_configuration_lib SystemConfiguration)
+        find_library(corewlan_lib CoreWLAN)
+
+        set(frameworks
+                ${corefoundation_lib}
+                ${foundation_lib}
+                ${cfnetwork_lib}
+                ${system_configuration_lib}
+                ${corewlan_lib}
+         )
+
     endif()
 
 endif ()
@@ -121,5 +135,5 @@ endif ()
 
 if (APPLE)
     find_library(SODIUM_LIB libsodium.a)
-    target_link_libraries(mars_android_sdk ${SODIUM_LIB})
+    target_link_libraries(mars_android_sdk ${SODIUM_LIB} ${frameworks})
 endif ()

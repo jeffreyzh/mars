@@ -340,7 +340,10 @@ bool LongLink::__NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, A
 }
 
 void LongLink::__RunResponseError(ErrCmdType _error_type, int _error_code, ConnectProfile& _profile, bool _networkreport) {
-
+    //额外增加的
+    _profile.disconn_errtype = _error_type;
+    _profile.disconn_errcode = _error_code;
+    
     AutoBuffer buf;
     AutoBuffer extension;
     OnResponse(_error_type, _error_code, 0, Task::kInvalidTaskID, buf, extension, _profile);
@@ -377,7 +380,7 @@ void LongLink::__UpdateProfile(const ConnectProfile& _conn_profile) {
     conn_profile_ = _conn_profile;
 
     if (0 != conn_profile_.disconn_time||connectstatus_==kConnected) //三种情况下会回调SignalConnection2（建链失败、建链成功、建链成功后断开）
-        STATIC_RETURN_SYNC2ASYNC_FUNC(boost::bind(boost::ref(SignalConnection2), conn_profile_, connectstatus_));
+        STATIC_RETURN_SYNC2ASYNC_FUNC(boost::bind(boost::ref(broadcast_linkstatus_signal_2_), conn_profile_, connectstatus_));
 
     if (0 != conn_profile_.disconn_time)
         STATIC_RETURN_SYNC2ASYNC_FUNC(boost::bind(boost::ref(broadcast_linkstatus_signal_), conn_profile_));

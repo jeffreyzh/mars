@@ -141,5 +141,7 @@
 #define BOOST_SYSTEM_NO_DEPRECATED 1
 #endif
 #ifdef ANDROID //only for android stlport
+#ifndef BOOST_STDEXCEPT_SKIP
 #include "boost/boost_stdexcept"
+#endif
 #endif

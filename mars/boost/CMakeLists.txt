@@ -7,7 +7,6 @@ enable_language(ASM)
 
 include_directories(..)
 
-
 file(GLOB_RECURSE BOOST_SRC_FILES *.c*)
 
 file(GLOB_RECURSE WINDOWS_SRC_FILES libs/context/src/windows/* libs/coroutine/src/windows/*)
@@ -32,4 +31,5 @@ else ()
             libs/context/src/asm/make_x86_64_sysv_macho_gas.S)
 endif ()
 
+target_compile_definitions(mars_boost PRIVATE BOOST_STDEXCEPT_SKIP=1) # 这里去掉boost_stdexcept的引入，因为stlport_shared已包含
 set_target_properties(mars_boost PROPERTIES POSITION_INDEPENDENT_CODE ON)

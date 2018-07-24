@@ -100,7 +100,7 @@ if (ENABLE_ANDROID_SUPPORT)
     #xlog
     add_library(lib_xlog SHARED IMPORTED)
     set_target_properties(lib_xlog PROPERTIES IMPORTED_LOCATION
-            ${CMAKE_SOURCE_DIR}/mars/mars/libraries/mars_android_sdk/libs/${ANDROID_ABI}/libmarsxlog.so)
+            ${CMAKE_SOURCE_DIR}/mars/mars/libraries/mars_xlog_sdk/libs/${ANDROID_ABI}/libmarsxlog.so)
     target_link_libraries(mars_android_sdk lib_xlog)
 
     #libsodium

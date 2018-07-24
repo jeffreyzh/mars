@@ -64,6 +64,7 @@ public:
 	static const uint32_t kGoawayTaskID = 0xFFFFFFEE;
 	static const uint32_t kRstTaskID = 0xFFFFFFED;
 	static const uint32_t kPushTaskID = 0xFFFFFFEC;
+	static const uint32_t kWindowUpdateTaskID = 0xFFFFFFEA;
 
 	Task();
     Task(uint32_t _taskid);

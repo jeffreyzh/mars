@@ -23,7 +23,7 @@ xcshareddata
 /samples/Mac/Kernel/MarsLib/
 /samples/android/xlogSample/app/src/main/jni/export_include/*.so
 
-/mars/libraries/mars_android_sdk/libs/*
+# /mars/libraries/mars_android_sdk/libs/*
 /mars/libraries/mars_android_sdk/so_cache/*
 /mars/libraries/mars_xlog_sdk/*
 /mars/libraries/samplelibs/*

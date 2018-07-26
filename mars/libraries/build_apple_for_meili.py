@@ -32,9 +32,7 @@ MEILI_APPLE_COPY_EXT_FILES = {
         "comm/assert/__assert.h":"comm/assert/__assert.h",
         "comm/unix/socket/socketselect.h":"comm/unix/socket/socketselect.h",
         "comm/unix/socket/socketpoll.h":"comm/unix/socket/socketpoll.h",
-        "comm/unix/socket/socketbreaker.h":"comm/unix/socket/socketbreaker.h",
-        "boost/signals2.hpp":"boost/signals2.hpp",
-        "boost/function.hpp":"boost/function.hpp"
+        "comm/unix/socket/socketbreaker.h":"comm/unix/socket/socketbreaker.h"
         }
 
 class Project:

@@ -217,6 +217,7 @@ NetCore::~NetCore() {
     
     longlink_task_manager_->LongLinkChannel().SignalConnection.disconnect_all_slots();
     longlink_task_manager_->LongLinkChannel().broadcast_linkstatus_signal_.disconnect_all_slots();
+    longlink_task_manager_->LongLinkChannel().broadcast_linkstatus_signal_2_.disconnect_all_slots();
 
     push_preprocess_signal_.disconnect_all_slots();
 
